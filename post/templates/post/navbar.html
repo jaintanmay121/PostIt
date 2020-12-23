@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Feed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/foundation/6.0.6/foundation.min.css"
+    />
+  </head>
+
+  <nav>
+    <div
+      style="
+        width: 100%;
+        position: fixed;
+        top: 0px;
+        z-index: 10000;
+        background: black;
+        padding: 1vw 1vw 1vw 0;
+        color: white;
+      "
+    >
+      <div>
+        <div class="row column">
+          <div
+            class="top-bar-left"
+            style="
+              font-size: 2.5vw;
+              background-color: #1783cc;
+              padding: 0.3vw 0.3vw 0.3vw 0.3vw;
+              border-radius: 0.3vw;
+              color: black;
+            "
+          >
+            PostIt!
+          </div>
+          <div class="top-bar-right">
+            <ul class="menu">
+              <li>
+                Logged In as <i><b>{{name}}</b></i>
+              </li>
+              <li name="logout" id="logout">
+                <a href="/logout">Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</html>

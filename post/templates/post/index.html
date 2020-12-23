@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Feed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../static/post/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    {% include "post/messages.html" %} {% include "post/navbar.html" %}
+  </head>
+  <body>
+    <div id="page">
+      <!-- Left Column for creating a new post -->
+      <div class="column-left fixed-top">
+        <div id="new-post">
+          <div class="new-post-head">Create New Post</div>
+          <form class="post-form" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <p>Enter Title:</p>
+            <input name="postTitle" required />
+            <br />
+            <br />
+            <p>Enter Post:</p>
+            <textarea
+              name="post"
+              maxlength="5000"
+              rows="6"
+              cols="5"
+              required
+            ></textarea>
+            <div class="btn">
+              <button class="button" type="submit">Post</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End of Left Column -->
+
+      <!-- Middle Column to display all posts -->
+      <div class="column-center offset-sm-6">
+        <div class="container" id="posts">
+          <!-- If posts exists -->
+          {% if posts %} {% for post in posts %}
+          <div id="post">
+            <div class="post-title">
+              <!-- Post header -->
+              <h2>{{post.postTitle}}</h2>
+              <footer>by {{post.user}}</footer>
+              <footer>on {{post.postDate}}</footer>
+
+              <!-- Like Button -->
+              <div class="like">
+                <form action="{% url 'post:Like' post.id %}" method="POST">
+                  {{ post.number_of_likes }}
+                  <!-- If user has already liked the post, show it red -->
+                  {% csrf_token %} {% if user in post.likes.filter %}
+                  <button type="submit" name="id" value="{{post.id}}">
+                    <i
+                      class="fa fa-heart"
+                      style="
+                        font-size: 2vw;
+                        text-shadow: 0 0 4px black;
+                        color: rgb(228, 54, 31);
+                        border-width: 1vw;
+                        border-color: black;
+                      "
+                    ></i>
+                  </button>
+                  <!-- If user has not liked the post yet, show it white -->
+                  {% else %}
+                  <button type="submit" name="id" value="{{post.id}}">
+                    <i
+                      class="fa fa-heart"
+                      style="
+                        font-size: 2vw;
+                        text-shadow: 0 0 4px black;
+                        color: rgb(247, 240, 240);
+                      "
+                    ></i>
+                  </button>
+                  {% endif %}
+                  <!-- End the liked condition -->
+                </form>
+              </div>
+              <!-- Like Button ends -->
+
+              <div class="edit-options">
+                <!-- If this post is by current user, add option to delete the post -->
+                {% ifequal post.user user%}
+                <form
+                  action="{% url 'post:deletePost' post.id %}"
+                  method="POST"
+                  onsubmit="window.mytest()"
+                >
+                  {% csrf_token %}
+                  <button type="submit" value="Delete Post">
+                    <i class="fa fa-trash" style="font-size: 2vw"></i>
+                  </button>
+                </form>
+                {% endifequal %}
+                <!-- Delete button ends -->
+              </div>
+            </div>
+            <!-- Post header ends -->
+
+            <!-- Content of the Post -->
+            <div class="post-content">
+              <!-- Post content -->
+              <div>
+                <p contenteditable="false">{{post.post}}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %} {% else %}
+          <!-- End of the posts -->
+
+          <!-- If no posts are avaliable -->
+          <p>No Posts Yet</p>
+          {% endif %}
+        </div>
+      </div>
+      <!-- End of center column -->
+
+      <!-- Right column for a random quote -->
+      <div class="column-right fixed-top">
+        <div id="quote">
+          <p id="qt">"{{Quote}}"</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script type="text/javascript">
+  window.mytest = function () {
+    var isValid = confirm("Are you sure you want delete this Post?");
+    if (!isValid) {
+      event.preventDefault();
+      alert("It wont delete. Yay!");
+    }
+  };
+
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+  $("textarea").autoResize();
+</script>
