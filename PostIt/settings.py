@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from .CONFIG import SECRET_KEY
+import dj_database_url
+
 # import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,8 +81,14 @@ WSGI_APPLICATION = 'PostIt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': '<database_name>',
+        'USER': 'qskdeyeqolemuw',
+        'PASSWORD': '7179f3acfc144bb7878034a39cf3ede69d906af2e759a7930279a8e2bca92e8a',
+        'HOST': 'ec2-3-231-48-230.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
