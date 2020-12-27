@@ -21,5 +21,5 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     url(r'^', include('post.urls')),
     path('admin/', admin.site.urls),
-    # url(r'^.*$', RedirectView.as_view(url='/feed/', permanent=False), name='index')
+    url(r'^.*$', RedirectView.as_view(url='/feed/', permanent=False), name='index')
 ]
