@@ -25,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 
+                'localhost',
                 '.herokuapp.com']
 
 
@@ -82,16 +83,18 @@ WSGI_APPLICATION = 'PostIt.wsgi.application'
 
 DATABASES = {
     'default': {
+        # 'ENGINE': 'django.db.backends.postgresql',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
-        # 'NAME': '<database_name>',
+        'NAME': 'dfgp502f52cunh',
         'USER': 'qskdeyeqolemuw',
         'PASSWORD': '7179f3acfc144bb7878034a39cf3ede69d906af2e759a7930279a8e2bca92e8a',
         'HOST': 'ec2-3-231-48-230.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
+# DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
 
 # Password validation
@@ -128,9 +131,12 @@ USE_TZ = True
 
 WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
-CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
+CSRF_COOKIE_SECURE = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
