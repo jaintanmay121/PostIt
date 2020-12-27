@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
-# import django
-# django.setup()
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
