@@ -14,8 +14,6 @@ from pathlib import Path
 from .CONFIG import SECRET_KEY
 import dj_database_url
 
-# import django_heroku
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
+
+import django
+django.setup()
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,8 +138,6 @@ CSRF_COOKIE_SECURE = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
  
-
-# django_heroku.settings(locals())
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
