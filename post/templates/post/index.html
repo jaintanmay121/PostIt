@@ -89,7 +89,7 @@
 
               <div class="edit-options">
                 <!-- If this post is by current user, add option to delete the post -->
-                {% ifequal post.user user%}
+                {% if post.user == user or request.user.is_superuser%}
                 <form
                   action="{% url 'post:deletePost' post.id %}"
                   method="POST"
@@ -100,7 +100,7 @@
                     <i class="fa fa-trash" style="font-size: 2vw"></i>
                   </button>
                 </form>
-                {% endifequal %}
+                {% endif %}
                 <!-- Delete button ends -->
               </div>
             </div>
