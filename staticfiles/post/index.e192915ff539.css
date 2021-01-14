@@ -1,0 +1,133 @@
+html,
+#page {
+  background-color: #f3f2ef;
+  top:0;
+}
+
+body{
+  background-color: #f3f2ef;
+}
+
+.column-left {
+  float: left;
+  width: 20%;
+  position: fixed;
+}
+.column-center {
+  display: inline-block;
+  min-width: 30%;
+  max-width: 80%;
+  padding-left: 20%;
+}
+.column-right {
+  float: right;
+  width: 20%;
+}
+
+.btn {
+  margin-top: 2vw;
+  display: flex;
+  justify-content: center;
+}
+footer {
+  font-size: 1vw;
+}
+
+#new-post,
+#quote {
+  margin: 3vw 3vw 3vw 3vw;
+  padding: 2vw 2vw 2vw 2vw;
+  border-style: solid;
+  border-radius: 1vw;
+  border-color: black;
+  border-width: 0.1vw;
+  position: relative;
+  background-color: white;
+}
+.new-post-head {
+  background-color: black;
+  color: white;
+  width: 100%;
+  font-size: large;
+  justify-content: center;
+  border-top-right-radius: 1vw;
+  border-top-left-radius: 1vw;
+  height: auto;
+  padding: 1vw 1vw 1vw 1vw;
+}
+#new-post {
+  padding: 0 0 2vw 0;
+}
+
+.post-form {
+  margin: 2vw 2vw 2vw 2vw;
+}
+
+input,
+textarea {
+  max-width: 100%;
+  min-height: 3vw;
+  border-radius: 0.7vw;
+  border-width: 1px;
+}
+
+#post {
+  border-style: solid;
+  border-radius: 1vw;
+  border-color: black;
+  border-width: 0.1vw;
+  position: relative;
+  overflow-y: auto;
+  max-height: 20vw;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
+  scrollbar-width: 10px;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+#post::-webkit-scrollbar {
+  display: none;
+}
+
+.post-title {
+  margin: 1vw 1vw 1vw 1vw;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+}
+.post-content {
+  margin: 1vw 1vw 1vw 1vw;
+}
+#page {
+  position: relative;
+  top: 6vw;
+  min-height: 100%;
+  /* height: 100%; */
+  /* bottom: 100px; */
+}
+
+#qt {
+  font-family: cursive;
+  font-style: italic;
+  font-size: large;
+  font-weight: 500;
+}
+
+.edit-options {
+  max-height: 5px;
+  width: 10%;
+  position: absolute;
+  top: 5%;
+  right: 0;
+  left: 90%;
+}
+
+
+@media only screen and (max-width: 900px) {
+  #quote, nav{
+      display: none;
+  }
+}

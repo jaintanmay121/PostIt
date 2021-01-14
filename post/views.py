@@ -3,13 +3,14 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from rest_framework import serializers
+# from rest_framework import serializers
+from rest_framework.response import Response
 from .models import Posts
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
 import requests
 import json
 import time
+
 
 # from django.http import HttpResponse
 # from rest_framework.decorators import api_view
@@ -39,10 +40,10 @@ import time
 #     print(f"\n\n{pk}\n\n")
 #     try:
 #         post = Posts.objects.get(pk=pk)
-#         data = {'user': post.user, 
-#                 'postTitle': post.postTitle, 
+#         data = {'user': post.user,
+#                 'postTitle': post.postTitle,
 #                 'post': post.post,
-#                 'likes': post.likes.count(), 
+#                 'likes': post.likes.count(),
 #                 'postDate': post.postDate.date()
 #                 }
 #     except Posts.DoesNotExist:
@@ -56,8 +57,46 @@ import time
 #         return Response(serializer.errors)#, status=status.HTTP_400_BAD_REQUEST)
 #         # serializer = PostSerializer(data)#post)
 #         # return Response(serializer.data)
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from django.contrib.auth.models import User
 
 
+@api_view(["GET"])
+def sendAll(request):
+    posts = Posts.objects.all()
+    content = []
+    for post in posts:
+        data = {"user": post.user.username,
+                'postTitle': post.postTitle,
+                'post': post.post,
+                'likes': post.likes.count(),
+                'postDate': post.postDate.date()
+                }
+        content.append(data)
+    return Response(content)
+
+
+@api_view(["GET"])
+def sendUser(request, username):
+
+    try:
+        pk = User.objects.get(username__iexact=username).pk
+    except User.DoesNotExist:
+        from rest_framework import exceptions
+        raise exceptions.NotFound(detail="User Does Not Exist! Try checking the username.")
+
+    posts = Posts.objects.filter(user=pk)
+    content = {}
+    for post in posts:
+        data = {'postTitle': post.postTitle,
+                'post': post.post,
+                'likes': post.likes.count(),
+                'postDate': post.postDate.date()
+                }
+
+        content[post.user.username] = data
+    return Response(content)
 
 
 def getQuote():
@@ -134,6 +173,7 @@ def userLogout(request):
 # Function for the main index page
 @login_required(login_url='/login/')
 def index(request):
+    from .forms import PostForm
     # Get a quote for right column
     quote = getQuote()
     # Load all posts
