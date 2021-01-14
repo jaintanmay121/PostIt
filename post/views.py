@@ -12,52 +12,6 @@ import json
 import time
 
 
-# from django.http import HttpResponse
-# from rest_framework.decorators import api_view
-# from rest_framework.response import Response
-# from .serializers import PostSerializer
-
-
-# @api_view(['GET'])
-# def post_collection(request):
-#     if request.method == 'GET':
-#         posts = Posts.objects.all()
-#         print("\n\n\n\n\n\n")
-#         data = []
-#         for i in posts:
-#             # print(i.user, type(i.user))
-#             temp = {'user': i.user, 'postTitle': i.postTitle, 'post': i.post,
-#                     'likes': i.likes.count(), 'postDate': i.postDate.date()}
-#             data.append(temp)
-#         serializer = PostSerializer(data, many=True)
-#         # serializer = PostSerializer(posts, many=True)
-#         return Response(serializer)
-
-
-# @api_view(['GET'])
-# def post_element(request, pk):
-
-#     print(f"\n\n{pk}\n\n")
-#     try:
-#         post = Posts.objects.get(pk=pk)
-#         data = {'user': post.user,
-#                 'postTitle': post.postTitle,
-#                 'post': post.post,
-#                 'likes': post.likes.count(),
-#                 'postDate': post.postDate.date()
-#                 }
-#     except Posts.DoesNotExist:
-#         return HttpResponse(status=404)
-
-#     if request.method == 'GET':
-#         serializer = PostSerializer(data=data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)#, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors)#, status=status.HTTP_400_BAD_REQUEST)
-#         # serializer = PostSerializer(data)#post)
-#         # return Response(serializer.data)
-from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 

@@ -1,7 +1,7 @@
-from django.urls import path, include
+from django.urls import path#, include
 from . import views
 from django.conf.urls import re_path
-from django.conf.urls import url
+# from django.conf.urls import url
 
 app_name = 'post'
 
