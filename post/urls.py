@@ -5,15 +5,11 @@ from django.conf.urls import url
 
 app_name = 'post'
 
-# from .serializers import NoteViewSet   
-# from rest_framework import routers
-# router = routers.DefaultRouter()
-# router.register(r'notes', NoteViewSet)
-
 
 urlpatterns = [
     path("register/", views.register, name="register"),
-    path("login/", views.userLogin, name="login"),
+    path("", views.userLogin, name="login"),
+    # path("login/", views.userLogin, name="login"),
     path("feed/", views.index, name="feed"),
     path("logout", views.userLogout, name="logout"),
     path("upload/", views.index, name="upload"),

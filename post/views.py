@@ -159,7 +159,7 @@ def register(request):
         # Saving the changes
         user.save()
         # Redirect to login page
-        return redirect('/login/')
+        return redirect('/')#login/')
 
     return render(request, 'post/register.html', context={"quote": quote})
 
@@ -167,11 +167,11 @@ def register(request):
 # Function to logout
 def userLogout(request):
     logout(request)
-    return redirect("/login")
+    return redirect("/")#login")
 
 
 # Function for the main index page
-@login_required(login_url='/login/')
+@login_required(login_url='/')#login/')
 def index(request):
     from .forms import PostForm
     # Get a quote for right column
@@ -202,7 +202,7 @@ def index(request):
 
 
 # Function to Delete a Post
-@login_required(login_url='/login/')
+@login_required(login_url='/')#login/')
 def deletePost(request, pk):
     # Get the post as instance
     post = get_object_or_404(Posts, pk=pk)
