@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^', include('post.urls')),
     path('admin/', admin.site.urls),
-    # url(r'^.*$', RedirectView.as_view(url='/feed/', permanent=False), name='index'),
+    url(r'^.*$', RedirectView.as_view(url='/feed/', permanent=False), name='index'),
     url(r'^api/$', views.sendAll),
     url(r'^api/(?P<username>.*)$', views.sendUser),
     path('docs/', include_docs_urls(title='PostIt! API'))
