@@ -41,7 +41,7 @@ def sendUser(request, username):
         raise exceptions.NotFound(detail="User Does Not Exist! Try checking the username.")
 
     posts = Posts.objects.filter(user=pk)
-    content = {}
+    content = []
     for post in posts:
         data = {'postTitle': post.postTitle,
                 'post': post.post,
@@ -49,7 +49,7 @@ def sendUser(request, username):
                 'postDate': post.postDate.date()
                 }
 
-        content[post.user.username] = data
+        content.append(data)
     return Response(content)
 
 
@@ -62,7 +62,6 @@ def getQuote():
 # Function to log into the system
 def userLogin(request):
     if request.user.is_authenticated:
-        time.sleep(0.01)
         messages.info(request, "Already logged into an account.")
         return redirect('/feed/')
     quote = getQuote()
@@ -76,7 +75,6 @@ def userLogin(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
-                time.sleep(0.01)
                 login(request, user)
                 # Redirect to Feeds
                 return redirect('/feed/')
@@ -98,7 +96,6 @@ def userLogin(request):
 def register(request):
 
     if request.user.is_authenticated:
-        time.sleep(0.01)
         messages.info(request, "Already logged into an account.")
         return redirect('/feed/')
 
@@ -140,7 +137,6 @@ def index(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            time.sleep(0.01)
             return redirect('/feed/')
 
     else:
@@ -164,7 +160,6 @@ def deletePost(request, pk):
     if request.method == 'POST':
         # Delete the post
         post.delete()
-        time.sleep(0.01)
         return redirect('/feed/')
 
     return render(request)
