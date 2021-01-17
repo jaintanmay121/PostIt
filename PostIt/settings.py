@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1',
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
+    'django.contrib.humanize',
     'post.apps.PostConfig',
     'django.contrib.admin',
     'django.contrib.auth',

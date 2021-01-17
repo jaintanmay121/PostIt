@@ -43,13 +43,15 @@
       <div class="column-center offset-sm-6">
         <div class="container" id="posts">
           <!-- If posts exists -->
+          
           {% if posts %} {% for post in posts %}
           <div id="post">
             <div class="post-title">
               <!-- Post header -->
               <h2>{{post.postTitle}}</h2>
               <footer>by {{post.user}}</footer>
-              <footer>on {{post.postDate}}</footer>
+              {% load humanize %}
+              <footer>on {{post.postDate|naturalday}}</footer>
 
               <!-- Like Button -->
               <div class="like">
@@ -125,7 +127,7 @@
       <!-- End of center column -->
 
       <!-- Right column for a random quote -->
-      <div class="column-right fixed-top">
+      <div class="column-right ">
         <div id="quote">
           <p id="qt">"{{Quote}}"</p>
         </div>
