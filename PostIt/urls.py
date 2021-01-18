@@ -21,16 +21,14 @@ from post import views
 # from django.views.generic import TemplateView
 from rest_framework.documentation import include_docs_urls
 # from django.conf.urls.static import static
+from rest_framework.schemas import get_schema_view
 
+API_DESCRIPTION = "Use these APIs to get details of all the posts on PostIt!."
 urlpatterns = [
     url(r'^', include('post.urls')),
     path('admin/', admin.site.urls),
     # url(r'^.*$', RedirectView.as_view(url='/feed/', permanent=False), name='index'),
     url(r'^api/$', views.sendAll),
     url(r'^api/(?P<username>.*)$', views.sendUser),
-    path('docs/', include_docs_urls(title='PostIt! API'))
-    # path('docs/', TemplateView.as_view(
-    #     template_name='post/swagger-ui.html',
-    #     extra_context={'schema_url':'openapi-schema'}
-    # ), name='docs')
+    path('docs/', include_docs_urls(title='PostIt! API', description=API_DESCRIPTION), )
 ]

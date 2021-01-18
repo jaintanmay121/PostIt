@@ -18,6 +18,9 @@ from django.contrib.auth.models import User
 
 @api_view(["GET"])
 def sendAll(request):
+    """
+    Sends details of all the posts by every user.
+    """
     posts = Posts.objects.all()
     content = []
     for post in posts:
@@ -33,7 +36,9 @@ def sendAll(request):
 
 @api_view(["GET"])
 def sendUser(request, username):
-
+    """
+    Sends details of all the posts by a particular user.
+    """
     try:
         pk = User.objects.get(username__iexact=username).pk
     except User.DoesNotExist:
