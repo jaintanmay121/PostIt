@@ -5,7 +5,6 @@ from django.conf.urls import re_path
 
 app_name = 'post'
 
-
 urlpatterns = [
     path("register/", views.register, name="register"),
     path("", views.userLogin, name="login"),

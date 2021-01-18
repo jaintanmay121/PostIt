@@ -18,12 +18,11 @@ from django.conf.urls import url
 from django.urls import path, include
 # from django.views.generic.base import RedirectView
 from post import views
-# from django.views.generic import TemplateView
 from rest_framework.documentation import include_docs_urls
-# from django.conf.urls.static import static
-from rest_framework.schemas import get_schema_view
 
+handler404 = 'post.views.handler404'
 API_DESCRIPTION = "Use these APIs to get details of all the posts on PostIt!."
+
 urlpatterns = [
     url(r'^', include('post.urls')),
     path('admin/', admin.site.urls),

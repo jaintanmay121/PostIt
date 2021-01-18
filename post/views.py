@@ -9,12 +9,12 @@ from .models import Posts
 from django.contrib.auth.decorators import login_required
 import requests
 import json
-import time
-
-
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 
+from django.http import HttpResponseNotFound  
+def handler404(request, *args, **kwargs):
+    return render(request, "post/404.html")
 
 @api_view(["GET"])
 def sendAll(request):
