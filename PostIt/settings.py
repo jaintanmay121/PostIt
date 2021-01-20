@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from .CONFIG import SECRET_KEY
+from .CONFIG import *
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -83,19 +83,14 @@ WSGI_APPLICATION = 'PostIt.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME': 'dfgp502f52cunh',
-        'USER': 'qskdeyeqolemuw',
-        'PASSWORD': '7179f3acfc144bb7878034a39cf3ede69d906af2e759a7930279a8e2bca92e8a',
-        'HOST': 'ec2-3-231-48-230.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
-# DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -131,9 +126,6 @@ USE_TZ = True
 
 WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# SESSION_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = True
-# CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False
 CSRF_COOKIE_SECURE = False
@@ -143,10 +135,7 @@ CSRF_COOKIE_SECURE = False
 
 STATIC_URL = '/static/'
 import os
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #'/static/'
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)

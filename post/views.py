@@ -3,7 +3,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-# from rest_framework import serializers
 from rest_framework.response import Response
 from .models import Posts
 from django.contrib.auth.decorators import login_required
@@ -12,9 +11,11 @@ import json
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 
-from django.http import HttpResponseNotFound  
+
+# Wrong URL i.e. 404 error page
 def handler404(request, *args, **kwargs):
     return render(request, "post/404.html")
+
 
 @api_view(["GET"])
 def sendAll(request):
@@ -43,7 +44,8 @@ def sendUser(request, username):
         pk = User.objects.get(username__iexact=username).pk
     except User.DoesNotExist:
         from rest_framework import exceptions
-        raise exceptions.NotFound(detail="User Does Not Exist! Try checking the username.")
+        raise exceptions.NotFound(
+            detail="User Does Not Exist! Try checking the username.")
 
     posts = Posts.objects.filter(user=pk)
     content = []
@@ -115,7 +117,7 @@ def register(request):
         # Saving the changes
         user.save()
         # Redirect to login page
-        return redirect('/')#login/')
+        return redirect('/')  # login/')
 
     return render(request, 'post/register.html', context={"quote": quote})
 
@@ -123,11 +125,11 @@ def register(request):
 # Function to logout
 def userLogout(request):
     logout(request)
-    return redirect("/")#login")
+    return redirect("/")  # login")
 
 
 # Function for the main index page
-@login_required(login_url='/')#login/')
+@login_required(login_url='/')  # login/')
 def index(request):
     from .forms import PostForm
     # Get a quote for right column
@@ -157,7 +159,7 @@ def index(request):
 
 
 # Function to Delete a Post
-@login_required(login_url='/')#login/')
+@login_required(login_url='/')  # login/')
 def deletePost(request, pk):
     # Get the post as instance
     post = get_object_or_404(Posts, pk=pk)
@@ -169,7 +171,7 @@ def deletePost(request, pk):
 
     return render(request)
 
-
+# Function to update the database for the post's like count
 def Like(request, pk):
     post = get_object_or_404(Posts, pk=pk)
 

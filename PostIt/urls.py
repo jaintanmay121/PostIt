@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path, include
-# from django.views.generic.base import RedirectView
 from post import views
 from rest_framework.documentation import include_docs_urls
 
@@ -26,7 +25,6 @@ API_DESCRIPTION = "Use these APIs to get details of all the posts on PostIt!."
 urlpatterns = [
     url(r'^', include('post.urls')),
     path('admin/', admin.site.urls),
-    # url(r'^.*$', RedirectView.as_view(url='/feed/', permanent=False), name='index'),
     url(r'^api/$', views.sendAll),
     url(r'^api/(?P<username>.*)$', views.sendUser),
     path('docs/', include_docs_urls(title='PostIt! API', description=API_DESCRIPTION), )
