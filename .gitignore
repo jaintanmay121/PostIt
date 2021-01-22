@@ -1,0 +1,5 @@
+PostIt/CONFIG.py
+.vscode
+post/__pycache__
+PostIt/__pycache__
+db.sqlite3
